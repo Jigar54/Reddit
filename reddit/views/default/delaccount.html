@@ -1,0 +1,7 @@
+{{extend 'layout.html'}}
+<ol>
+{{for i in range (len(acc)):}}
+<li>{{=acc[i]['first_name']}}:- <a href='d/{{=acc[i]['id']}}'>Click here to delete this users account</a></li>
+<br/>
+{{pass}}
+</ol>

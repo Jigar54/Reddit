@@ -1,0 +1,60 @@
+{{extend 'layout.html'}}
+<table>
+<tr>
+<th>CATEGORIES :</th>
+{{for j in range(len(ca)):}}
+<td><a href='/app1/default/listcat/{{=ca[j]['id']}}'>{{=ca[j]['Name']}}</a></td>
+{{pass}}
+</tr>
+</table>
+<br>
+<img src='{{=URL('download', args=auth.user.Profile_Pic)}}' style='float:right' width='175px' height='175px'>
+<h3 style='color:white;background-color:black'>WELCOME {{=auth.user.first_name}}</h3>
+<br><br><br><br>
+<br>
+<h4><center>
+Here Is The List Of News Under Category <span style='font-weight:bold;color:darkblue'>{{=cat[0]['Name']}}</span>
+</center></h4>
+<hr>
+{{i=(len(x)-1)}}
+{{while (i>=0):}}
+<a href='/app1/default/l/{{=x[i]['id']}}/5'>
+<img src="http://chrisblattman.com/files/2011/07/facebook_like_button_big1.jpg" height=5% width=10% style="float:right"></a>
+<a href='/app1/default/l/{{=x[i]['id']}}/-3'>
+<img src="http://alexcalic.files.wordpress.com/2011/06/facebook-dislike-button.png" height=5% width=10% style="float:right"></a>
+<div style='font-weight:bold'><font size='5'><a href='{{=x[i]['URL']}}' color='red'>{{=x[i]['Heading']}}</a></font></div>
+<div style='font-weight:bold'><img src='{{=URL('download', args=q[i]['Profile_Pic'])}}' style='float:left' width='150px' height='105px'>Post Points:{{=x[i]['Rating']}}</div>
+<br><br><br><br>
+<p style='background-color:grey;color:black'>
+<marquee>
+{{=x[i]['Post_details']}}
+</marquee>
+<br>	
+</p>
+{{if (x[i]['Video']!=None):}}
+<center>
+<iframe width="560" height="315" src='{{=x[i]['Video']}}' frameborder="0" allowfullscreen></iframe>
+</center>
+{{pass}}
+<table>
+<tr>
+<td><a href='/app1/default/addcomment/{{=x[i]['id']}}'>Add Comments</a></td>
+<td></td>
+<td><a href='/app1/default/showcomments/{{=x[i]['id']}}'>See the previous comments</a></td>
+</tr>
+</table>
+<ul>
+<li><a href='/app1/default/deletepost/{{=x[i]['id']}}/lall'>Delete This Post</li></a>
+<li><a href='/app1/default/updatepost/{{=x[i]['id']}}/lall'>Update This Post</li></a>
+</ul>
+<div style='text-align:right'><i>Uploaded by:- {{=q[i]['first_name']}} at {{=x[i]['Time']}}</i></div>
+<hr>
+{{i=i-1}}
+{{pass}}
+<em>HEADLINES</em>
+<p style='background-color:grey;color:black'>
+<marquee>
+{{for i in range(len(x)):}}
+{{=x[i]['Post_details']}}.&nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+{{pass}}
+</marquee>

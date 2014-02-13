@@ -1,0 +1,13 @@
+{{extend 'layout.html'}}
+{{for i in range(len(a)):}}
+<div style='background-color:lightyellow;color:darkblue'>
+{{=i+1}}.&nbsp&nbsp&nbsp{{=a[i]['Comment']}}<br></div>
+<p style='text-align:right'><em>Commented by:- {{=b[i]['auth_user']['first_name']}} on {{=b[i]['Comment']['Time']}} </em>
+</p>
+{{pass}}
+<p style='font-weight:bold;color:black;background-color:lightblue;text-align:center;font-size:20px'><u>ADD A COMMENT</u>
+{{=form}}
+</p>
+<a href='/app1/default/addcomment/{{=r}}'>Add a Comment!</a><br>
+<a href='/app1/default/lall'>Home</a>
+

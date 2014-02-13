@@ -1,0 +1,34 @@
+{{extend 'layout.html'}}
+<table>
+<tr>
+<th>CATEGORIES :</th>
+{{for j in range(len(ca)):}}
+<td><a href="listcat/{{=ca[j]['id']}}">{{=ca[j]['Name']}}</a></td>
+{{pass}}
+</tr>
+</table>
+{{i=(len(x)-1)}}
+{{while (i>=0):}}
+<h3><b><u>HEADING</u></b> : {{=x[i]['Heading']}}</h3>
+<a href='l/{{=x[i]['id']}}/5'>
+<img src="http://chrisblattman.com/files/2011/07/facebook_like_button_big1.jpg" height=5% width=10% style="float:right"></a>
+<a href='l/{{=x[i]['id']}}/-3'>
+<img src="http://alexcalic.files.wordpress.com/2011/06/facebook-dislike-button.png" height=5% width=10% style="float:right"></a>
+<br>
+<br>
+<pre>
+<h5>Category: {{=ca[(x[i]['Category']-1)]['Name']}}							Time of Upload : {{=x[i]['Time']}}
+</h5></pre>
+<a href='{{=x[i]['URL']}}'>
+<marquee>{{=x[i]['Post_details']}}</marquee></a>
+<br>
+<br>
+<p style='text-align:right'>Uploaded by:- {{=y[i]['first_name']}}</p>
+<a href='addcomment/{{=x[i]['id']}}'>Add Comments</a>&nbsp&nbsp<a href='showcomments/{{=x[i]['id']}}'>See the previous comments</a>
+<ul>
+<li><a href='deletepost/{{=x[i]['id']}}/lall'>Delete This Post</li></a>
+<li><a href='updatepost/{{=x[i]['id']}}/lall'>Update This Post</li></a>
+</ul>
+<hr>
+{{i=i-1}}
+{{pass}}

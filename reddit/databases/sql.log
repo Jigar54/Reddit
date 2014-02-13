@@ -1,0 +1,114 @@
+timestamp: 2013-08-27T18:22:00.598584
+CREATE TABLE auth_user(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    first_name CHAR(128),
+    last_name CHAR(128),
+    email CHAR(512),
+    password CHAR(512),
+    registration_key CHAR(512),
+    reset_password_key CHAR(512),
+    registration_id CHAR(512)
+);
+success!
+timestamp: 2013-08-27T18:22:00.718343
+CREATE TABLE auth_group(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    role CHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2013-08-27T18:22:00.840978
+CREATE TABLE auth_membership(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER REFERENCES auth_user(id) ON DELETE CASCADE,
+    group_id INTEGER REFERENCES auth_group(id) ON DELETE CASCADE
+);
+success!
+timestamp: 2013-08-27T18:22:00.962584
+CREATE TABLE auth_permission(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    group_id INTEGER REFERENCES auth_group(id) ON DELETE CASCADE,
+    name CHAR(512),
+    table_name CHAR(512),
+    record_id INTEGER
+);
+success!
+timestamp: 2013-08-27T18:22:01.084191
+CREATE TABLE auth_event(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    time_stamp TIMESTAMP,
+    client_ip CHAR(512),
+    user_id INTEGER REFERENCES auth_user(id) ON DELETE CASCADE,
+    origin CHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2013-08-27T18:22:01.241926
+CREATE TABLE auth_cas(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER REFERENCES auth_user(id) ON DELETE CASCADE,
+    created_on TIMESTAMP,
+    service CHAR(512),
+    ticket CHAR(512),
+    renew CHAR(1)
+);
+success!
+timestamp: 2013-08-27T18:27:23.339156
+CREATE TABLE Post(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Heading CHAR(512),
+    Category CHAR(32768),
+    Post_details TEXT,
+    User INTEGER REFERENCES auth_user(id) ON DELETE CASCADE,
+    URL CHAR(512) NOT NULL,
+    Rating INTEGER,
+    Image CHAR(512),
+    Video CHAR(512)
+);
+success!
+timestamp: 2013-08-27T18:30:48.845455
+ALTER TABLE Post ADD time TIMESTAMP;
+timestamp: 2013-08-27T18:37:01.357059
+ALTER TABLE auth_user ADD city CHAR(512);
+timestamp: 2013-08-27T18:37:01.561463
+ALTER TABLE auth_user ADD profile_pic CHAR(512);
+timestamp: 2013-08-27T18:37:01.683436
+ALTER TABLE auth_user ADD member_type CHAR(32768);
+timestamp: 2013-08-29T22:17:58.832888
+ALTER TABLE Post ADD user_liked TEXT;
+timestamp: 2013-08-29T22:17:59.018661
+CREATE TABLE Votes(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    User CHAR(512),
+    Likes INTEGER,
+    Dislikes INTEGER
+);
+success!
+timestamp: 2013-08-30T05:08:04.281666
+CREATE TABLE Comment(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Post_no INTEGER REFERENCES Post(id) ON DELETE CASCADE,
+    Comment TEXT,
+    By_user CHAR(512)
+);
+success!
+timestamp: 2013-08-31T01:21:10.664198
+CREATE TABLE Category(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(512)
+);
+success!
+timestamp: 2013-08-31T01:24:57.506785
+CREATE TABLE cat(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name CHAR(512)
+);
+success!
+timestamp: 2013-09-01T17:25:17.243823
+ALTER TABLE Votes ADD post_id INTEGER REFERENCES Post(id) ON DELETE CASCADE;
+timestamp: 2013-09-01T17:25:17.380681
+ALTER TABLE Votes ADD by_user CHAR(512);
+timestamp: 2013-09-01T18:44:09.080049
+ALTER TABLE Votes ADD b_user CHAR(512);
+timestamp: 2013-09-02T00:08:28.753501
+ALTER TABLE Comment ADD time TIMESTAMP;
